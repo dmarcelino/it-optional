@@ -1,0 +1,33 @@
+{
+  "name": "it-optional",
+  "version": "0.0.1",
+  "description": "Mocha add-on method it.optional() which marks a test as pending if it would fail",
+  "main": "it.optional.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmarcelino/it-optional.git"
+  },
+  "keywords": [
+    "mocha",
+    "test",
+    "optional"
+  ],
+  "author": {
+    "name": "Dario Marcelino",
+    "email": "dario@appscot.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmarcelino/it-optional/issues"
+  },
+  "homepage": "https://github.com/dmarcelino/it-optional#readme",
+  "devDependencies": {
+    "mocha": "^2.2.4"
+  }
+}
