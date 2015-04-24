@@ -4,7 +4,9 @@
 Mocha add-on method it.optional() which marks a test as pending if it would fail
 
 ## Instalation
+```
 npm install it-optional -S
+```
 
 ## Usage
 ```javascript
