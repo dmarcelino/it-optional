@@ -25,6 +25,14 @@ function TestOptional(title, titlePending, fn) {
     titlePending = 'PENDING: ' + title;
   }
   
+  var skippedOrDone = false;
+  function callDone(done){
+    if(!skippedOrDone){
+      skippedOrDone = true;
+      done();
+    }
+  }
+  
   it(title, function(done){
     var self = this;
     
@@ -32,7 +40,7 @@ function TestOptional(title, titlePending, fn) {
       if (result) {
         self.skip();
       }
-      done();
+      callDone(done);
     };
     
     function executeTest(){
@@ -48,7 +56,7 @@ function TestOptional(title, titlePending, fn) {
       TestOptional.count++;
       // async skip not supported yet: https://github.com/mochajs/mocha/issues/1625
       // self.skip();
-      done();
+      callDone(done);
     }
     
     try {
@@ -58,6 +66,7 @@ function TestOptional(title, titlePending, fn) {
       // sync'ed / same tick exception
       self.test.title = titlePending;
       TestOptional.count++;
+      skippedOrDone = true;
       self.skip();
     }
     
