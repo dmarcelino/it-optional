@@ -13,6 +13,12 @@ describe('optional tests', function(){
       done(new Error('oops'));
     });
     
+    it.optional('should do mno eventually', function(done){
+      setTimeout(function(){
+        done(new Error('oops'));
+      }, 5);
+    });
+    
     it.optional('should do ikj eventually', function(done){
       throw new Error('uncaught error');
     });
@@ -20,7 +26,7 @@ describe('optional tests', function(){
     it.optional('should do abc eventually', function(done){
       setTimeout(function(){
         assert.equal('a', 'b');
-      }, 100);
+      }, 5);
     });
   
   });
