@@ -1,8 +1,13 @@
 /**
+ * Dependencies
+ */
+ var tryasync = require('./tryasync');
+ 
+/**
  * Expose `TestOptional`.
  */
 exports = module.exports = TestOptional;
-var tryasync = require('./tryasync');
+
 
 /**
  * Initialize a new `Test` with the given `title` and callback `fn`, if test 
@@ -13,6 +18,8 @@ var tryasync = require('./tryasync');
  * @param {Function} fn
  */
 function TestOptional(title, titlePending, fn) {
+  TestOptional.count = 0;
+  
   if (!fn) {
     fn = titlePending;
     titlePending = 'PENDING: ' + title;
@@ -38,6 +45,7 @@ function TestOptional(title, titlePending, fn) {
     
     function handleErrorAsync(e){
       self.test.title = titlePending;
+      TestOptional.count++;
       // async skip not supported yet: https://github.com/mochajs/mocha/issues/1625
       // self.skip();
       done();
@@ -49,6 +57,7 @@ function TestOptional(title, titlePending, fn) {
     } catch(e){
       // sync'ed / same tick exception
       self.test.title = titlePending;
+      TestOptional.count++;
       self.skip();
     }
     

@@ -3,7 +3,13 @@ var assert = require('assert');
 
 describe('optional tests', function(){
   
+  var asyncTestsDone, syncTestsDone;
+  
   describe('async', function(){
+    
+    after(function(){
+      asyncTestsDone = true;
+    });
   
     it.optional('should do xyz', function(done){
       done();
@@ -32,6 +38,10 @@ describe('optional tests', function(){
   });
   
   describe('sync', function(){
+    
+    after(function(){
+      syncTestsDone = true;
+    });
   
     it.optional('should do xyz', function(){});
     
@@ -43,6 +53,24 @@ describe('optional tests', function(){
       assert.equal(1, 2);
     });
   
+  });
+  
+  describe('optional count', function(){
+    
+    // Polls `someCondition` every 50ms
+    function allTestsDone(done) {
+      if (asyncTestsDone && syncTestsDone) done();
+      else setTimeout( function(){ allTestsDone(done) }, 50 );
+    }
+    
+    before(function( done ){
+      allTestsDone( done );
+    });
+    
+    it('should be 6', function(){
+      assert.equal(it.optional.count, 6);
+    });
+
   });
 
 });
