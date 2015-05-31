@@ -25,22 +25,25 @@ function TestOptional(title, titlePending, fn) {
     titlePending = 'PENDING: ' + title;
   }
   
-  var skippedOrDone = false;
-  function callDone(done){
-    if(!skippedOrDone){
-      skippedOrDone = true;
-      done();
-    }
-  }
-  
   it(title, function(done){
     var self = this;
+    
+    var skipped = false;
+    function skipTest(cb){
+      if(skipped){
+        return;
+      }
+      skipped = true;
+      self.test.title = titlePending;
+      TestOptional.count++;
+      cb();
+    }
     
     function processResult(result) {
       if (result) {
         self.skip();
       }
-      callDone(done);
+      done();
     };
     
     function executeTest(){
@@ -52,11 +55,9 @@ function TestOptional(title, titlePending, fn) {
     }
     
     function handleErrorAsync(e){
-      self.test.title = titlePending;
-      TestOptional.count++;
       // async skip not supported yet: https://github.com/mochajs/mocha/issues/1625
       // self.skip();
-      callDone(done);
+      skipTest(done);
     }
     
     try {
@@ -64,10 +65,7 @@ function TestOptional(title, titlePending, fn) {
       .catch(handleErrorAsync);
     } catch(e){
       // sync'ed / same tick exception
-      self.test.title = titlePending;
-      TestOptional.count++;
-      skippedOrDone = true;
-      self.skip();
+      skipTest(self.skip.bind(this));
     }
     
   });

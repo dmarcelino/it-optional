@@ -1,6 +1,6 @@
 {
   "name": "it-optional",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Mocha add-on method it.optional() which marks a test as pending if it would fail",
   "main": "it.optional.js",
   "directories": {
@@ -28,6 +28,6 @@
   },
   "homepage": "https://github.com/dmarcelino/it-optional#readme",
   "devDependencies": {
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.0"
   }
 }
