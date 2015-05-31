@@ -6,9 +6,12 @@
 # it-optional
 Mocha add-on method it.optional() which marks a test as pending if it would fail
 
+## Overview
+it-optional was created with adapter/plugin test suites in mind where a common set of tests is used to test different modules. If one or more tests is not mandatory for all it can be marked as optional using `it.optional(title, fn)`. If the test passes then its marked as "passing" if the test fails then it's marked as "pending". This way optional functionality can be testes without breaking the whole suite.
+
 ## Instalation
 ```
-npm install it-optional -S
+npm i it-optional -S
 ```
 
 ## Usage
@@ -23,8 +26,14 @@ it.optional('should do xyz', function(done){
 it.optional('should do xyz eventually', function(done){
   done(new Error('oops'));
 });
-// - Pending: should do xyz async eventually
+// - PENDING: should do xyz async eventually
 
+it.optional('should do abc eventually', function(done){
+  Assert.equal(1, 2);
+});
+// - PENDING: should do abc async eventually
+
+// custom messages
 it.optional('should do xyz eventually', 'xyz not implemented yet', function(done){
   done(new Error('oops'));
 });
