@@ -1,4 +1,7 @@
 [![npm version](https://badge.fury.io/js/it-optional.svg)](http://badge.fury.io/js/it-optional)
+[![Build Status](https://travis-ci.org/dmarcelino/it-optional.svg?branch=master)](https://travis-ci.org/dmarcelino/it-optional)
+[![Dependency Status](https://david-dm.org/dmarcelino/it-optional.svg)](https://david-dm.org/dmarcelino/it-optional)
+
 
 # it-optional
 Mocha add-on method it.optional() which marks a test as pending if it would fail
