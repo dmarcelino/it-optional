@@ -7,7 +7,7 @@
 Mocha add-on method it.optional() which marks a test as pending if it would fail
 
 ## Overview
-it-optional was created with adapter/plugin test suites in mind where a common set of tests is used to test different modules. If one or more tests is not mandatory for all it can be marked as optional using `it.optional(title, fn)`. If the test passes then its marked as "passing" if the test fails then it's marked as "pending". This way optional functionality can be testes without breaking the whole suite.
+it-optional was created with adapter/plugin test suites in mind where a common set of tests is used to test different modules. If one or more tests is not mandatory for all it can be marked as optional using `it.optional(title, fn)`. If the test passes then its marked as "passing" if the test fails then it's marked as "pending". This way optional functionality can be tested without breaking the whole suite.
 
 ## Instalation
 ```
