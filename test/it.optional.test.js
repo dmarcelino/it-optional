@@ -34,6 +34,13 @@ describe('optional tests', function(){
         assert.equal('a', 'b');
       }, 5);
     });
+    
+    it.optional('should never be done', function(done){
+    });
+    
+    it.optional('should never be done in 50ms', function(done){
+      this.timeout(50);
+    });
   
   });
   
@@ -67,8 +74,8 @@ describe('optional tests', function(){
       allTestsDone( done );
     });
     
-    it('should be 6', function(){
-      assert.equal(it.optional.count, 6);
+    it('should be 8', function(){
+      assert.equal(it.optional.count, 8);
     });
 
   });

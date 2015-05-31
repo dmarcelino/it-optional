@@ -28,22 +28,42 @@ function TestOptional(title, titlePending, fn) {
   it(title, function(done){
     var self = this;
     
+    var timer;
     var skipped = false;
     function skipTest(cb){
       if(skipped){
         return;
       }
       skipped = true;
+      clearTimeout(timer);
       self.test.title = titlePending;
       TestOptional.count++;
       cb();
     }
     
+    // Increases the test default timeout and add a timeout of our own
+    var testTimeout = self.__proto__.timeout;
+    var resetTimer = function resetTimer(ms){
+      ms = ms || self.runnable()._timeout || 2000;
+      if (timer) { clearTimeout(timer); };
+      timer = setTimeout(function(){
+        titlePending = titlePending + ' (timeout)';
+        skipTest(done);
+      }, ms);
+      testTimeout.call(self, ms + 50);
+    };
+    self.timeout = function newTimeout(ms){
+      resetTimer(ms);
+    };
+    resetTimer();
+    
     function processResult(result) {
       if (result) {
         self.skip();
+      } else {
+        clearTimeout(timer);
+        done(); 
       }
-      done();
     };
     
     function executeTest(){
